@@ -13,7 +13,7 @@ test("Constructor with invalid name parameter throws TypeError", () => {
     let weapon
     expect(() => {
         weapon = new Weapon('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Invalid weapon name!'))
 })
 
 test('Weapon.isPlayable() returns expected value', () => {

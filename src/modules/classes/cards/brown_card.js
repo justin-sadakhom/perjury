@@ -19,6 +19,17 @@ class BrownCard extends PlayingCard {
             throw new TypeError('Invalid single-use card name!')
 
         super(name, rank, suit);
+
+        if (this.constructor === BrownCard)
+            throw new TypeError('Abstract class "BrownCard" cannot be instantiated directly.')
+    }
+
+    isPlayable() {
+        throw new Error('You have to implement isPlayable()!')
+    }
+
+    play() {
+        throw new Error('You have to implement play()!')
     }
 }
 

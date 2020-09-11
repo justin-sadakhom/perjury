@@ -4,5 +4,5 @@ test("Directly instantiating BlueCard throws TypeError", () => {
     let card
     expect(() => {
         card = new BlueCard('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Abstract class "BlueCard" cannot be instantiated directly.'))
 })

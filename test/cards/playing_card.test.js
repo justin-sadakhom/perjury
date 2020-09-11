@@ -11,21 +11,21 @@ test("Directly instantiating PlayingCard throws TypeError", () => {
     let card
     expect(() => {
         card = new PlayingCard('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Abstract class "PlayingCard" cannot be instantiated directly.'))
 })
 
 test("Constructor with invalid rank parameter throws TypeError", () => {
     let card
     expect(() => {
         card = new TruthBullet('Number One', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Invalid rank!'))
 })
 
 test("Constructor with invalid suit parameter throws TypeError", () => {
     let card
     expect(() => {
         card = new TruthBullet('Ace', 'Tuxedo')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Invalid suit!'))
 })
 
 test("Dummy constructor that doesn't implement isPlayable() method throws TypeError", () => {
@@ -40,7 +40,7 @@ test("Dummy constructor that doesn't implement isPlayable() method throws TypeEr
         }
 
         dummy = new TestCard('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('All subclasses must implement the isPlayable() method.'))
 })
 
 test("Dummy constructor that doesn't implement play() method throws TypeError", () => {
@@ -59,5 +59,5 @@ test("Dummy constructor that doesn't implement play() method throws TypeError", 
         }
 
         dummy = new TestCard('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('All subclasses must implement the play() method.'))
 })

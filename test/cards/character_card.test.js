@@ -9,5 +9,5 @@ test("Constructor with invalid name parameter throws TypeError", () => {
     let char
     expect(() => {
         char = new CharacterCard('Name')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Invalid character name!'))
 })

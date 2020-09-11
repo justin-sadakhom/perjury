@@ -4,12 +4,12 @@ test("Constructor with invalid name parameter throws TypeError", () => {
     let card
     expect(() => {
         card = new BrownCard('Lie Bullet', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Invalid single-use card name!'))
 })
 
 test("Directly instantiating BrownCard throws TypeError", () => {
     let card
     expect(() => {
-        card = new BrownCard('Name', 'Ace', 'Spades')
-    }).toThrow(TypeError)
+        card = new BrownCard('Truth Bullet', 'Ace', 'Spades')
+    }).toThrow(TypeError('Abstract class "BrownCard" cannot be instantiated directly.'))
 })

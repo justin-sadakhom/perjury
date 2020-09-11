@@ -5,7 +5,7 @@ test("Directly instantiating Card throws TypeError", () => {
     let card
     expect(() => {
         card = new Card('Name')
-    }).toThrow(TypeError)
+    }).toThrow(TypeError('Abstract class "Card" cannot be instantiated directly.'))
 })
 
 test("Constructor with standard parameter initializes fields correctly", () => {
