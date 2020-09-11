@@ -9,7 +9,7 @@ const SkillNames = Object.freeze({
 class Skill extends BlueCard {
 
     constructor(name, rank, suit) {
-        if (!name in SkillNames)
+        if (!(Object.values(SkillNames).includes(name)))
             throw new TypeError('Invalid skill name!')
 
         super(name, rank, suit)
