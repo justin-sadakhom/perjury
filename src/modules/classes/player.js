@@ -58,7 +58,7 @@ class Player {
     }
 
     addSkill(cardIndex) {
-        this._skills.push(this.hand(cardIndex))
+        this._skills.push(this.hand[cardIndex])
     }
 
     discardSkill(skillIndex, deck) {
