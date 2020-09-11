@@ -1,8 +1,8 @@
 import { Weapon, WeaponNames } from '../../src/modules/classes/cards/weapon'
-import {Player} from "../../src/modules/classes/player";
-import {RoleCard, Roles} from "../../src/modules/classes/cards/role_card";
-import {CharacterCard, Characters} from "../../src/modules/classes/cards/character_card";
-import {Deck} from "../../src/modules/classes/deck";
+import {Player} from '../../src/modules/classes/player'
+import {RoleCard, Roles} from '../../src/modules/classes/cards/role_card'
+import {CharacterCard, Characters} from '../../src/modules/classes/cards/character_card'
+import {Deck} from '../../src/modules/classes/deck'
 
 test("Constructor with standard parameters initializes fields correctly", () => {
     let weapon = new Weapon('Peacemaker', 'Ace', 'Spades')
