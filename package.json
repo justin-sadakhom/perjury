@@ -1,0 +1,14 @@
+{
+  "name": "perjury",
+  "version": "1.0.0",
+  "dependencies": {
+    "@jest/globals": "^26.4.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "jest": "^26.4.2"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}

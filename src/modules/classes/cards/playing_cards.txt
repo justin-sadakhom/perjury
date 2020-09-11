@@ -1,0 +1,70 @@
+Clubs, Ace, Perjury
+Clubs, Ace, Rifle
+Clubs, 2, Truth Bullet
+Clubs, 3, Truth Bullet
+Clubs, 4, Truth Bullet
+Clubs, 5, Truth Bullet
+Clubs, 6, Truth Bullet
+Clubs, 7, Truth Bullet
+Clubs, 8, Truth Bullet
+Clubs, 9, Truth Bullet
+Clubs, 10, Perjury
+Clubs, 10, Peacemaker
+Clubs, Jack, Perjury
+Clubs, Jack, Pistol
+Clubs, Queen, Perjury
+Clubs, Queen, Pistol
+Clubs, King, Perjury
+Clubs, King, Carbine
+Diamonds, Ace, Truth Bullet
+Diamonds, 2, Truth Bullet
+Diamonds, 3, Truth Bullet
+Diamonds, 4, Truth Bullet
+Diamonds, 5, Truth Bullet
+Diamonds, 6, Truth Bullet
+Diamonds, 7, Truth Bullet
+Diamonds, 8, Hot Seat
+Diamonds, 8, Truth Bullet
+Diamonds, 9, Alibi
+Diamonds, 9, Truth Bullet
+Diamonds, 10, Alibi
+Diamonds, 10, Truth Bullet
+Diamonds, Jack, Alibi
+Diamonds, Jack, Truth Bullet
+Diamonds, Queen, Truth Bullet
+Diamonds, King, Truth Bullet
+Hearts, Ace, Hot Seat
+Hearts, Ace, Truth Bullet
+Hearts, 3, Hangman's Gambit
+Hearts, 5, Hope
+Hearts, 6, Present
+Hearts, 7, Present
+Hearts, 8, Present
+Hearts, 8, Trust
+Hearts, 9, Present
+Hearts, 9, Trust
+Hearts, 10, Despair
+Hearts, 10, Present
+Hearts, Jack, Hot Seat
+Hearts, Jack, Present
+Hearst, Queen, Hot Seat
+Hearts, Queen, Truth Bullet
+Hearts, King, Alibi
+Hearts, King, Truth Bullet
+Spades, Ace, Concentration
+Spades, Ace, Truth Bullet
+Spades, 2, Perjury
+Spades, 3, Perjury
+Spades, 4, Perjury
+Spades, 5, Perjury
+Spades, 6, Perjury
+Spades, 7, Perjury
+Spades, 8, Perjury
+Spades, 8, Sniper Rifle
+Spades, 9, Nonstop Debate
+Spades, 9, Nonstop Debate
+Spades, 10, Peacemaker
+Spades, Jack,
+Spades, Queen, Plot Armor
+Spades, King, Plot Armor
+Spades, King, Pistol
