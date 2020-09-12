@@ -10,7 +10,7 @@ class HangmanGambit extends BrownCard {
         return true
     }
 
-    play(player, _players, cardIndex, deck) {
+    play(player, _players, _cardIndex, deck) {
         player.draw(3, deck)
     }
 }

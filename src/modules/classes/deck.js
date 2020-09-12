@@ -14,7 +14,7 @@ class Deck {
         if (!fromDiscard) {
             let drawn = this._drawPile.pop()
 
-            if (this._drawPile.isEmpty())
+            if (this._drawPile.length === 0)
                 this.reset()
 
             return drawn
