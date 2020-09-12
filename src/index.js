@@ -1,7 +1,3 @@
-const dictionary = Object.freeze({
-    A: 'a',
-    B: 'b'
-})
-
-let state = !'A' in dictionary
-console.log(state)
+let text = 'words'
+text.slice(0, text.length - 1)
+console.log(text)

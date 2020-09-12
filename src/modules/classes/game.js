@@ -1,4 +1,3 @@
-import { gamePrompt } from './prompt.js'
 import { Suits } from './cards/playing_card.js'
 import { CharacterCard, Characters } from './cards/character_card.js'
 import { Deck } from './deck.js'
@@ -17,26 +16,43 @@ import { Hope } from './cards/hope.js'
 import { HotSeat } from './cards/hot_seat.js'
 
 function selectTargetIndex(players) {
-    let choice = ''
-    gamePrompt('Who do you want to target? (Input player index)', choice)
-    return parseInt(choice)
+    let text = "Who do you want to target?" + '\n'
+
+    for (let i = 0; i < players.length; i++)
+        text += '[' + i + '] '
+
+    console.log(text.slice(0, text.length - 1))
+
+    // Return index of first player in list.
+    // Will implement actual selection later.
+    return 0
+}
+
+function selectCardType() {
+    let text = "Select card from where?" + '\n'
+    text += "[Weapon (0)] [Skill (1)] [Hand (2)]"
+    console.log(text)
+
+    // Return index signifying hand.
+    // Will implement actual selection later.
+    return 2
 }
 
 function selectCardIndex(player, fromHand=true) {
-    let choice = ''
-    let cards = ''
+    let text = "Which card will you select?" + '\n'
 
     if (fromHand)
         for (let i = 0; i < player.hand.length; i++)
-            cards += '[' + player.hand[i].name + '] '
+            text += '[' + i + '] '
     else
         for (let i = 0; i < player.skills.length; i++)
-            cards += '[' + player.skills[i].name + '] '
+            text += '[' + i + '] '
 
-    cards = cards.slice(0, cards.length - 1)
+    console.log(text.slice(0, text.length - 1))
 
-    gamePrompt('Which card will you select? (Input card index) ' + cards, choice)
-    return parseInt(choice)
+    // Return index of first card in list.
+    // Will implement actual selection later.
+    return 0
 }
 
 function processAttack(player, players, targetIndex, deck) {
@@ -55,15 +71,13 @@ function processAttack(player, players, targetIndex, deck) {
     }
 
     if (!shielded && (target.hasCard(Perjury) || (target.hasCard(Present) && target.health().current === 1))) {
-        let choice = ''
-        gamePrompt('Use your Perjury / Beer card? (Select card index, -1 for no)', choice)
+        let choice = selectCardIndex(target)
 
-        if (choice === '-1')
+        if (choice === -1)
             target.damage(1)
 
         else {
-            // TODO: perform a check to ensure this is a Perjury / Beer card.
-            let cardIndex = parseInt(choice)
+            let cardIndex = choice
 
             if (player.canPlay(cardIndex))
                 player.play(cardIndex, players, deck)
@@ -269,7 +283,7 @@ class Game {
             let choice1 = ''
 
             while (choice1 !== '-1') {
-                gamePrompt('What will you do?', choice1)
+                cardChoicePrompt('What will you do?', choice1)
 
                 if (choice1 !== '-1')
                     currentPlayer.play(currentPlayer, this.players, parseInt(choice1), this.deck)
@@ -281,7 +295,7 @@ class Game {
             let choice2 = ''
 
             while (currentPlayer.hand.length > currentPlayer.health.max) {
-                gamePrompt('Select a card to discard', choice2)
+                cardChoicePrompt('Select a card to discard', choice2)
                 currentPlayer.discardFromHand(parseInt(choice2), this.deck)
             }
 
@@ -303,4 +317,4 @@ class Game {
     }
 }
 
-export { processAttack, selectCardIndex, selectTargetIndex }
+export { processAttack, selectCardIndex, selectCardType, selectTargetIndex }

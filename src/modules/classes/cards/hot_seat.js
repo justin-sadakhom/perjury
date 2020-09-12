@@ -1,6 +1,5 @@
 import { BrownCard, BrownCardNames } from './brown_card.js'
-import { gamePrompt } from '../prompt.js'
-import { selectTargetIndex } from '../game.js'
+import { selectCardIndex, selectTargetIndex } from '../game.js'
 
 class HotSeat extends BrownCard {
 
@@ -16,10 +15,8 @@ class HotSeat extends BrownCard {
         let target = players[selectTargetIndex(player.playersInRange(players))]
 
         // Prompt for which card the player wants to steal.
-        let choice = ''
-        gamePrompt('Which card do you want to steal?', choice)
-
-        player.steal(parseInt(choice), target)
+        let choice = selectCardIndex(target)
+        player.steal(choice, target)
     }
 }
 

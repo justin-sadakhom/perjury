@@ -1,6 +1,5 @@
 import { BrownCard, BrownCardNames } from './brown_card.js'
-import { gamePrompt } from '../prompt.js'
-import { selectCardIndex, selectTargetIndex } from '../game.js'
+import { selectCardIndex, selectCardType, selectTargetIndex } from '../game.js'
 
 class Alibi extends BrownCard {
 
@@ -11,7 +10,7 @@ class Alibi extends BrownCard {
     isPlayable(_player, players) {
         // Check if any player has a card that can be discarded.
         for (let i = 0; i < players.length; i++)
-            if (players[i].hasWeapon() || players[i].hasAnySkill() || !players[i].hand.isEmpty())
+            if (players[i].hasWeapon() || players[i].hasAnySkill() || !(players[i].hasEmptyHand()))
                 return true
 
         return false
@@ -22,7 +21,7 @@ class Alibi extends BrownCard {
         let validTargets = []
 
         for (let i = 0; i < players.length; i++)
-            if (players[i].hasWeapon() || players[i].hasAnySkill() || !players[i].hand.isEmpty())
+            if (players[i] !== player && (players[i].hasWeapon() || players[i].hasAnySkill() || !(players[i].hasEmptyHand())))
                 validTargets.push(players[i])
 
         let target = validTargets[selectTargetIndex(validTargets)]
@@ -34,22 +33,21 @@ class Alibi extends BrownCard {
             message += 'Their weapon? (0)'
         if (target.hasAnySkill())
             message += 'One of their skills? (1)'
-        if (!target.hand.isEmpty())
+        if (!(target.hasEmptyHand()))
             message += 'From their hand? (2)'
 
         // Prompt what type of card to discard.
-        let choice = ''
-        gamePrompt('What will you discard? ' + message, choice)
+        let choice = selectCardType()
 
-        // Prompt for which card and force target to discard that.
+        // Force target to discard that.
         switch (choice) {
-            case '0':
+            case 0:
                 target.discardWeapon(deck)
                 break
-            case '1':
+            case 1:
                 target.discardSkill(selectCardIndex(target, false), deck)
                 break
-            case '2':
+            case 2:
                 target.discardFromHand(selectCardIndex(target), deck)
                 break
         }

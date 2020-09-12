@@ -67,7 +67,7 @@ class Player {
     }
 
     hasAnySkill() {
-        return this.skills !== []
+        return this.skills.length > 0
     }
 
     hasSkill(skill) {
@@ -98,6 +98,10 @@ class Player {
         return this._hand
     }
 
+    hasEmptyHand() {
+        return this.hand.length === 0
+    }
+
     canPlay(cardIndex, players) {
         return this.hand[cardIndex].isPlayable(this, players)
     }
@@ -126,7 +130,9 @@ class Player {
     }
 
     remove(cardIndex) {
-        return this._hand.slice(this.hand[cardIndex])
+        let removed = this.hand[cardIndex]
+        this.hand.splice(cardIndex)
+        return removed
     }
 
     discardFromHand(cardIndex, deck) {
