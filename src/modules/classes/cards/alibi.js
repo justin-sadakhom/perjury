@@ -36,6 +36,8 @@ class Alibi extends BrownCard {
         if (!(target.hasEmptyHand()))
             message += 'From their hand? (2)'
 
+        console.log(message)
+
         // Prompt what type of card to discard.
         let choice = selectCardType()
 

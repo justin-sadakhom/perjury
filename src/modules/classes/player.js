@@ -1,8 +1,9 @@
 import { BrownCard } from './cards/brown_card.js'
 import { Health } from './health.js'
-import { Roles } from './cards/role_card.js'
+import {RoleCard, Roles} from './cards/role_card.js'
 import { Skill, SkillNames } from './cards/skill.js'
 import { Weapon, WeaponNames } from './cards/weapon.js'
+import {CharacterCard, Characters} from "./cards/character_card.js";
 
 class Player {
 
@@ -20,7 +21,7 @@ class Player {
     _initHealth() {
         let amount = this.character.health
 
-        if (this.role === Roles.PROTAGONIST)
+        if (this.role.name === Roles.PROTAGONIST)
             amount += 1
 
         return new Health(amount)
@@ -109,12 +110,10 @@ class Player {
     play(cardIndex, players, deck) {
         let card = this.hand[cardIndex]
 
-        if (card instanceof BrownCard)
+        if (card instanceof BrownCard || card instanceof Skill)
             this.discardFromHand(cardIndex, deck)
         else if (card instanceof Weapon)
             this.discardWeapon(deck)
-        else if (card instanceof Skill)
-            this.discardSkill(cardIndex, deck)
 
         card.play(this, players, cardIndex, deck)
     }
@@ -171,7 +170,7 @@ class Player {
         return this._under_fire
     }
 
-    set setUnderFire(state) {
+    set underFire(state) {
         this._under_fire = state
     }
 
@@ -242,5 +241,7 @@ class Player {
         return result
     }
 }
+
+let player = new Player(new RoleCard(Roles.PROTAGONIST), new CharacterCard(Characters.KAEDE))
 
 export { Player }

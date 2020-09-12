@@ -45,7 +45,7 @@ class CharacterCard extends Card {
             throw new TypeError('Invalid character name!')
 
         super(name)
-        this._health = CharacterHealth[name]
+        this._health = CharacterHealth[name.toUpperCase()]
     }
 
     get health() {

@@ -2,7 +2,7 @@ import { CharacterCard, Characters, CharacterHealth } from '../../src/modules/cl
 
 test("Constructor with standard parameters initializes fields correctly", () => {
     let card = new CharacterCard(Characters.KAEDE)
-    expect(card.health).toBe(CharacterHealth[Characters.KAEDE])
+    expect(card.health).toBe(4)
 })
 
 test("Constructor with invalid name parameter throws TypeError", () => {

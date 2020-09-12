@@ -13,7 +13,8 @@ class Despair extends BrownCard {
 
     play(player, players, deck) {
         for (let i = 0; i < players.length; i++)
-            processAttack(player, players, i, deck)
+            if (players[i] !== player)
+                processAttack(player, players, i, deck)
     }
 }
 

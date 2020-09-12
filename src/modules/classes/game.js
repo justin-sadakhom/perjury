@@ -58,7 +58,7 @@ function selectCardIndex(player, fromHand=true) {
 function processAttack(player, players, targetIndex, deck) {
 
     let target = players[targetIndex]
-    target.setUnderFire(true)
+    target.underFire = true
     let shielded = false
 
     if (target.hasSkill(SkillNames.PLOT_ARMOR)) {
@@ -86,7 +86,7 @@ function processAttack(player, players, targetIndex, deck) {
     else if (!shielded)
         target.damage(1)
 
-    target.setUnderFire(false)
+    target.underFire = false
     player.addBullet()
 
     // Add checks for if a Blackened or Spotless get eliminated.

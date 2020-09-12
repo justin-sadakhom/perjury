@@ -1,14 +1,14 @@
 import { Alibi } from '../../src/modules/classes/cards/alibi'
-import { BrownCardNames } from '../../src/modules/classes/cards/brown_card'
+import { Deck } from '../../src/modules/classes/deck'
 import { Player } from '../../src/modules/classes/player'
+import { Skill } from '../../src/modules/classes/cards/skill'
+import { TruthBullet } from '../../src/modules/classes/cards/truth_bullet'
+import { Weapon } from '../../src/modules/classes/cards/weapon'
+import { BrownCardNames } from '../../src/modules/classes/cards/brown_card'
 import { RoleCard, Roles } from '../../src/modules/classes/cards/role_card'
 import { CharacterCard, Characters } from '../../src/modules/classes/cards/character_card'
-import {Weapon} from "../../src/modules/classes/cards/weapon";
-import {Deck} from "../../src/modules/classes/deck";
-import {Skill} from "../../src/modules/classes/cards/skill";
-import {TruthBullet} from "../../src/modules/classes/cards/truth_bullet";
 
-test("Constructor with initializes name correctly", () => {
+test("Constructor initializes name correctly", () => {
     let card = new Alibi('Ace', 'Spades')
     expect(card.name).toBe(BrownCardNames.ALIBI)
 })
@@ -75,8 +75,6 @@ test("Alibi.play() where the player chooses to discard a card", () => {
 
     let card = new Alibi('Ace', 'Spades')
     card.play(player, players, 0, deck)
-
-    console.log(enemy.hand)
 
     expect(enemy.hasEmptyHand()).toBe(true)
     expect(deck._discard.length).toBe(1)
