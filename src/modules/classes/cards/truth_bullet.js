@@ -8,12 +8,13 @@ class TruthBullet extends BrownCard {
     }
 
     isPlayable(player, players) {
-        return player.canFire() && player.playersInRange(players) > 0
+        return player.canFire() && player.playersInRange(players).length > 0
     }
 
-    play(player, players, deck) {
-        let targetIndex = selectTargetIndex(player.playersInRange(players))
-        processAttack(player, players, targetIndex, deck)
+    play(player, players, _cardIndex, deck) {
+        let validTargets = player.playersInRange(players)
+        let targetIndex = selectTargetIndex(validTargets)
+        processAttack(player, validTargets, targetIndex, deck)
     }
 }
 

@@ -7,11 +7,11 @@ class Perjury extends BrownCard {
     }
 
     isPlayable(player, _players) {
-        return player.underFire()
+        return player.underFire
     }
 
-    play(player, _players, cardIndex, _deck) {
-        player.setUnderFire(false)
+    play(player, _players, _cardIndex, _deck) {
+        player.underFire = false
     }
 }
 

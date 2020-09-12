@@ -72,8 +72,8 @@ class Player {
     }
 
     hasSkill(skill) {
-        for (let i = 0; i < this._skills.length; i++)
-            if (this._skills[i].name === skill)
+        for (let i = 0; i < this.skills.length; i++)
+            if (this.skills[i].name === skill)
                 return true
 
         return false
@@ -146,8 +146,8 @@ class Player {
         return false
     }
 
-    steal(cardIndex, target) {
-        this._hand.push(target._hand.splice(cardIndex, 1))
+    steal(cardIndex, target, fromHand=true) {
+        this.hand.push(target.remove(cardIndex))
     }
 
     get bulletsFired() {
@@ -163,7 +163,7 @@ class Player {
     }
 
     canFire() {
-        return this.bulletsFired === 0 || this.weapon.name === WeaponNames.PEACEMAKER
+        return this.bulletsFired === 0 || (this.hasWeapon() && this.weapon.name === WeaponNames.PEACEMAKER)
     }
 
     get underFire() {
@@ -216,11 +216,11 @@ class Player {
     }
 
     range(withWeapon) {
-        let range = 0
+        let range = 1
 
         if (withWeapon) {
             if (this.hasWeapon())
-                range = this.weapon().range()
+                range = this.weapon().range
             else
                 range = 1
         }
@@ -235,13 +235,11 @@ class Player {
         let result = []
 
         for (let i = 0; i < players.length; i++)
-            if (this !== players[i] && this.playerDistance(players[i]) <= this.range(withWeapon))
+            if (this !== players[i] && this.playerDistance(players[i], players) <= this.range(withWeapon))
                 result.push(players[i])
 
         return result
     }
 }
-
-let player = new Player(new RoleCard(Roles.PROTAGONIST), new CharacterCard(Characters.KAEDE))
 
 export { Player }

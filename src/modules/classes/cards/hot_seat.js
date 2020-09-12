@@ -8,13 +8,12 @@ class HotSeat extends BrownCard {
     }
 
     isPlayable(player, players) {
-        return player.playersInRange(players, false) > 0
+        return player.playersInRange(players, false).length > 0
     }
 
     play(player, players, cardIndex, _deck) {
-        let target = players[selectTargetIndex(player.playersInRange(players))]
-
-        // Prompt for which card the player wants to steal.
+        let validTargets = player.playersInRange(players, false)
+        let target = validTargets[selectTargetIndex(validTargets)]
         let choice = selectCardIndex(target)
         player.steal(choice, target)
     }

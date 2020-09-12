@@ -19,7 +19,7 @@ class Skill extends BlueCard {
         return !player.hasSkill(this.name)
     }
 
-    play(player, _players, cardIndex, _discard, _drawPile) {
+    play(player, _players, cardIndex, _deck) {
         player.addSkill(cardIndex)
     }
 }

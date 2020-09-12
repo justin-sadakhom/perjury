@@ -7,10 +7,10 @@ class Present extends BrownCard {
     }
 
     isPlayable(player, players) {
-        return players.length > 2 && (player.underFire() && player.health.current === 1)
+        return players.length > 2 || (player.underFire && player.health.current === 1)
     }
 
-    play(player, _players, cardIndex, _deck) {
+    play(player, _players, _cardIndex, _deck) {
         player.heal()
     }
 }

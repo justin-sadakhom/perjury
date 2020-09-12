@@ -79,8 +79,8 @@ function processAttack(player, players, targetIndex, deck) {
         else {
             let cardIndex = choice
 
-            if (player.canPlay(cardIndex))
-                player.play(cardIndex, players, deck)
+            if (target.canPlay(cardIndex))
+                target.play(target, players, cardIndex, deck)
         }
     }
     else if (!shielded)
@@ -163,7 +163,7 @@ class Game {
     }
 
     _initCards() {
-        let fs = require('fs')
+        const fs = require('fs')
         fs.readFile('./modules/classes/cards/playing_cards.txt', 'utf-8', function(err, data) {
 
             if (err)

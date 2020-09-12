@@ -1,4 +1,4 @@
-import {BrownCard, BrownCardNames } from './brown_card.js'
+import { BrownCard, BrownCardNames } from './brown_card.js'
 
 class Hope extends BrownCard {
 
