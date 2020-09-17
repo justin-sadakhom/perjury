@@ -6,7 +6,9 @@ class Deck {
     }
 
     peek() {
-        return this._drawPile.pop()
+        let peek = this._drawPile.pop()
+        this._drawPile.push(peek)
+        return peek
     }
 
     draw(fromDiscard=false) {
@@ -36,7 +38,8 @@ class Deck {
 
         while (clone.length > 0) {
             let randomIndex = Math.floor(Math.random() * clone.length)
-            this._drawPile.push(clone.splice(randomIndex))
+            this._drawPile.push(clone[randomIndex])
+            clone.splice(randomIndex)
         }
     }
 
