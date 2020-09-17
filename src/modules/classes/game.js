@@ -89,7 +89,14 @@ function processAttack(player, players, targetIndex, deck) {
     target.underFire = false
 
     // Add checks for if a Blackened or Spotless get eliminated.
-    
+    if (!target.isAlive()) {
+        target.role.flip()
+
+        if (target.role.name === Roles.BLACKENED)
+            player.draw(3, deck)
+        else if (target.role.name === Roles.SPOTLESS && player.role.name === Roles.PROTAGONIST)
+            player.discardAllCards(deck)
+    }
 }
 
 class Game {
@@ -281,23 +288,29 @@ class Game {
             currentPlayer.draw(2, this.deck)
 
             // Play any number of cards.
-            let choice1 = ''
+            let keepPlaying = true
 
-            while (choice1 !== '-1') {
-                cardChoicePrompt('What will you do?', choice1)
+            while (keepPlaying) {
+                let choice1 = selectCardIndex(currentPlayer)
 
-                if (choice1 !== '-1')
-                    currentPlayer.play(currentPlayer, this.players, parseInt(choice1), this.deck)
+                if (choice1 !== -1) {
+                    currentPlayer.play(currentPlayer, this.players, choice1, this.deck)
+
+                    // Remove any dead players from the player list.
+                    for (let i = this.players.length - 1; i > 0; i--)
+                        if (!this.players[i].isAlive())
+                            this.players.splice(i, 1)
+                }
+                else
+                    keepPlaying = false
             }
 
             currentPlayer.resetBullets()
 
             // Discard excess cards.
-            let choice2 = ''
-
-            while (currentPlayer.hand.length > currentPlayer.health.max) {
-                cardChoicePrompt('Select a card to discard', choice2)
-                currentPlayer.discardFromHand(parseInt(choice2), this.deck)
+            while (currentPlayer.hand.length > currentPlayer.health.current) {
+                let choice2 = selectCardIndex(currentPlayer())
+                currentPlayer.discardFromHand(choice2, this.deck)
             }
 
             // Move onto next player.

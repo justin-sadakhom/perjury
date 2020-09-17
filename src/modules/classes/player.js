@@ -152,6 +152,16 @@ class Player {
         this.hand.push(target.remove(cardIndex))
     }
 
+    discardAllCards(deck) {
+        while (!this.hasEmptyHand())
+            this.discardFromHand(0, deck)
+
+        while (!this.hasAnySkill())
+            this.discardSkill(0, deck)
+
+        this.discardWeapon(deck)
+    }
+
     get bulletsFired() {
         return this._bullets_fired
     }
