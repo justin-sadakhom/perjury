@@ -47,7 +47,7 @@ Hearts, 10, Despair
 Hearts, 10, Present
 Hearts, Jack, Hot Seat
 Hearts, Jack, Present
-Hearst, Queen, Hot Seat
+Hearts, Queen, Hot Seat
 Hearts, Queen, Truth Bullet
 Hearts, King, Alibi
 Hearts, King, Truth Bullet
@@ -64,7 +64,6 @@ Spades, 8, Sniper Rifle
 Spades, 9, Nonstop Debate
 Spades, 9, Nonstop Debate
 Spades, 10, Peacemaker
-Spades, Jack,
 Spades, Queen, Plot Armor
 Spades, King, Plot Armor
 Spades, King, Pistol

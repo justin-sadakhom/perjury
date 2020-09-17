@@ -5,7 +5,7 @@ const Characters = Object.freeze({
     ANGIE: "Angie",
     GONTA: "Gonta",
     HIMIKO: "Himiko",
-    K1_B0: "K1-BO",
+    K1_B0: "K1-B0",
     KAITO: "Kaito",
     KIRUMI: "Kirumi",
     KOKICHI: "Kokichi",

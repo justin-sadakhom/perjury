@@ -116,7 +116,9 @@ class Game {
         while (numPlayers > 0) {
             let roleIndex = Math.floor(Math.random() * roles.length)
             let charIndex = Math.floor(Math.random() * characters.length)
-            players.push(new Player(roles.splice(roleIndex)), characters.splice(charIndex))
+            players.push(new Player(roles[roleIndex], characters[charIndex]))
+            roles.splice(roleIndex, 1)
+            characters.splice(charIndex, 1)
             numPlayers -= 1
         }
 
@@ -148,12 +150,21 @@ class Game {
         let clone = []
         const keys = Object.keys(Characters)
 
-        for (const key in keys)
-            clone.push(key)
+        for (let i = 0; i < keys.length; i ++)
+            clone.push(keys[i])
 
         while (numPlayers > 0) {
             let randomNum = Math.floor(Math.random() * clone.length)
-            let character = new CharacterCard(clone.splice(randomNum))
+            let name = clone[randomNum]
+            let someName = ''
+
+            if (!name.includes('0'))
+                someName = name[0] + name.toLowerCase().slice(1)
+            else
+                someName = 'K1-B0'
+
+            let character = new CharacterCard(someName)
+            clone.splice(randomNum, 1)
             characters.push(character)
             numPlayers -= 1
         }
@@ -162,73 +173,64 @@ class Game {
     }
 
     _initCards() {
+        let cards = []
+
         const fs = require('fs')
-        fs.readFile('./modules/classes/cards/playing_cards.txt', 'utf-8', function(err, data) {
+        let data = fs.readFileSync('src/modules/classes/cards/playing_cards.txt', 'utf-8')
+        let dataArray = data.split('\r\n')
 
-            if (err)
-                return console.log(err);
+        for (let i = 0; i < dataArray.length; i++)
+            dataArray[i] = dataArray[i].split(', ')
 
-            else {
-                let cards = []
-                let dataArray = data.split('\r\n')
+        for (let i = 0; i < dataArray.length; i++) {
+            let card = null
 
-                for (let i = 0; i < dataArray.length; i++)
-                    dataArray[i] = dataArray[i].split(', ')
-
-                for (let i = 0; i < dataArray.length; i++) {
-                    let card = null
-                    let name = ''
-
-                    switch (dataArray[i][2]) {
-                        case "Peacemaker":
-                        case "Pistol":
-                        case "Carbine":
-                        case "Rifle":
-                        case "Sniper Rifle":
-                            name = WeaponNames[dataArray[i][2]].toUpperCase().replace(' ', '_')
-                            card = new Weapon(name, dataArray[i][1].toUpperCase().replace(' ', '_'), dataArray[i][0])
-                            break
-                        case "Trust":
-                        case "Concentration":
-                        case "Plot Armor":
-                            name = SkillNames[dataArray[i][2]].toUpperCase().replace(' ', '_')
-                            card = new Skill(name, dataArray[i][1].toUpperCase().replace(' ', '_'), dataArray[i][0])
-                            break
-                        case "Alibi":
-                            card = new Alibi(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Despair":
-                            card = new Despair(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Hangman's Gambit":
-                            card = new HangmanGambit(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Hope":
-                            card = new Hope(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Hot Seat":
-                            card = new HotSeat(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Nonstop Debate":
-                            card = new NonstopDebate(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Perjury":
-                            card = new Perjury(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Present":
-                            card = new Present(dataArray[i][1], dataArray[i][0])
-                            break
-                        case "Truth Bullet":
-                            card = new TruthBullet(dataArray[i][1], dataArray[i][0])
-                            break
-                    }
-
-                    cards.push(card)
-                }
-
-                return cards
+            switch (dataArray[i][2]) {
+                case "Peacemaker":
+                case "Pistol":
+                case "Carbine":
+                case "Rifle":
+                case "Sniper Rifle":
+                    card = new Weapon(dataArray[i][2], dataArray[i][1], dataArray[i][0])
+                    break
+                case "Trust":
+                case "Concentration":
+                case "Plot Armor":
+                    card = new Skill(dataArray[i][2], dataArray[i][1], dataArray[i][0])
+                    break
+                case "Alibi":
+                    card = new Alibi(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Despair":
+                    card = new Despair(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Hangman's Gambit":
+                    card = new HangmanGambit(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Hope":
+                    card = new Hope(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Hot Seat":
+                    card = new HotSeat(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Nonstop Debate":
+                    card = new NonstopDebate(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Perjury":
+                    card = new Perjury(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Present":
+                    card = new Present(dataArray[i][1], dataArray[i][0])
+                    break
+                case "Truth Bullet":
+                    card = new TruthBullet(dataArray[i][1], dataArray[i][0])
+                    break
             }
-        })
+
+            cards.push(card)
+        }
+
+        return cards
     }
 
     get players() {
@@ -316,4 +318,4 @@ class Game {
     }
 }
 
-export { processAttack, selectCardIndex, selectCardType, selectTargetIndex }
+export { Game, processAttack, selectCardIndex, selectCardType, selectTargetIndex }

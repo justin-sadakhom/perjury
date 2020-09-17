@@ -248,7 +248,6 @@ test("Player.remove() with the first card in their hand", () => {
     player.hand.push(card1)
     player.hand.push(card2)
 
-    console.log(player.hand)
     expect(player.remove(0)).toBe(card1)
     expect(player.hand.length).toBe(1)
 })
