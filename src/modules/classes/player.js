@@ -1,9 +1,8 @@
 import { BrownCard } from './cards/brown_card.js'
 import { Health } from './health.js'
-import {RoleCard, Roles} from './cards/role_card.js'
+import { Roles } from './cards/role_card.js'
 import { Skill, SkillNames } from './cards/skill.js'
 import { Weapon, WeaponNames } from './cards/weapon.js'
-import {CharacterCard, Characters} from "./cards/character_card.js";
 
 class Player {
 
@@ -40,7 +39,9 @@ class Player {
     }
 
     setWeapon(replacement, deck) {
-        this.discardWeapon(deck)
+        if (this.weapon !== null)
+            this.discardWeapon(deck)
+
         this._weapon = replacement
     }
 
@@ -59,11 +60,12 @@ class Player {
     }
 
     addSkill(cardIndex) {
-        this._skills.push(this.hand[cardIndex])
+        this._skills.push(this.remove(cardIndex))
     }
 
     discardSkill(skillIndex, deck) {
-        let discard = this.skills.splice(skillIndex)
+        let discard = this.skills[skillIndex]
+        this.skills.splice(skillIndex, 1)
         deck.addDiscard(discard)
     }
 
@@ -130,7 +132,7 @@ class Player {
 
     remove(cardIndex) {
         let removed = this.hand[cardIndex]
-        this.hand.splice(cardIndex)
+        this.hand.splice(cardIndex, 1)
         return removed
     }
 
@@ -140,7 +142,7 @@ class Player {
 
     hasCard(cardType) {
         for (let i = 0; i < this._hand.length; i++)
-            if (this.hand(i) instanceof cardType)
+            if (this.hand[i] instanceof cardType)
                 return true
 
         return false

@@ -87,10 +87,9 @@ function processAttack(player, players, targetIndex, deck) {
         target.damage(1)
 
     target.underFire = false
-    player.addBullet()
 
     // Add checks for if a Blackened or Spotless get eliminated.
-
+    
 }
 
 class Game {

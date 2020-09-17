@@ -15,6 +15,7 @@ class TruthBullet extends BrownCard {
         let validTargets = player.playersInRange(players)
         let targetIndex = selectTargetIndex(validTargets)
         processAttack(player, validTargets, targetIndex, deck)
+        player.addBullet()
     }
 }
 
