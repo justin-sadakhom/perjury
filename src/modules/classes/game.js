@@ -90,7 +90,9 @@ function processAttack(player, players, targetIndex, deck) {
 
     // Add checks for if a Blackened or Spotless get eliminated.
     if (!target.isAlive()) {
-        target.role.flip()
+
+        if (target.role.faceDown())
+            target.role.flip()
 
         if (target.role.name === Roles.BLACKENED)
             player.draw(3, deck)
@@ -104,6 +106,7 @@ class Game {
     constructor(numPlayers) {
         this._players = this._initPlayers(numPlayers)
         this._deck = new Deck(this._initCards())
+        this.deck.shuffle()
 
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].role.name === Roles.PROTAGONIST) {
@@ -111,7 +114,7 @@ class Game {
                 this._current = i
             }
 
-            this.players[i].draw(this.players[i].health, this.deck)
+            this.players[i].draw(this.players[i].health.current, this.deck)
         }
     }
 
@@ -248,7 +251,7 @@ class Game {
         return this._deck
     }
 
-    currentPlayer() {
+    get currentPlayer() {
         return this._players[this._current]
     }
 
@@ -262,7 +265,7 @@ class Game {
     protagonistIsAlive() {
         for (let i = 0; i < this.players.length; i++)
             if (this.players[i].role.name === Roles.PROTAGONIST)
-                return this.players[i].health.current > 0
+                return this.players[i].isAlive()
     }
 
     antagonistsAreAlive() {
@@ -290,11 +293,12 @@ class Game {
             // Play any number of cards.
             let keepPlaying = true
 
-            while (keepPlaying) {
+            while (keepPlaying && !currentPlayer.hasEmptyHand()) {
                 let choice1 = selectCardIndex(currentPlayer)
 
                 if (choice1 !== -1) {
-                    currentPlayer.play(currentPlayer, this.players, choice1, this.deck)
+                    if (currentPlayer.hand[choice1].isPlayable(currentPlayer, this.players))
+                        currentPlayer.play(choice1, this.players, this.deck)
 
                     // Remove any dead players from the player list.
                     for (let i = this.players.length - 1; i > 0; i--)

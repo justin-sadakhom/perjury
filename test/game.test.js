@@ -101,3 +101,91 @@ test("Game._initCards()", () => {
     let result = game._initCards()
     expect(result.length).toBe(69)
 })
+
+test("Game.currentPlayer() starts with the Protagonist", () => {
+    let game = new Game(4)
+    expect(game.currentPlayer.role.name).toBe(Roles.PROTAGONIST)
+})
+
+test("Game.toNextPlayer() moves to the next player in the list", () => {
+    let game = new Game(4)
+    let index1
+    let index2
+
+    for (let i = 0; i < game.players.length; i++) {
+        if (game.players[i].role.name === Roles.PROTAGONIST) {
+            if (i + 1 === game.players.length)
+                index2 = 0
+            else
+                index2 = i + 1
+
+            index1 = i
+        }
+    }
+
+    game.toNextPlayer()
+    expect(game.currentPlayer).toBe(game.players[index2])
+})
+
+test("Game.protagonistIsAlive() when the Protagonist is dead", () => {
+    let game = new Game(4)
+    let pro
+
+    for (let i = 0; i < game.players.length; i++)
+        if (game.players[i].role.name === Roles.PROTAGONIST)
+            pro = game.players[i]
+
+    pro.damage(pro.health.max)
+    expect(game.protagonistIsAlive()).toBe(false)
+})
+
+test("Game.protagonistIsAlive() when the Protagonist is alive", () => {
+    let game = new Game(4)
+    let pro
+
+    for (let i = 0; i < game.players.length; i++)
+        if (game.players[i].role.name === Roles.PROTAGONIST)
+            pro = game.players[i]
+
+    expect(game.protagonistIsAlive()).toBe(true)
+})
+
+test("Game.antagonistsAreAlive() when the Blackened is alive", () => {
+    let game = new Game(4)
+    let blackened
+
+    for (let i = 0; i < game.players.length; i++)
+        if (game.players[i].role.name === Roles.BLACKENED)
+            blackened = game.players[i]
+
+    expect(game.antagonistsAreAlive()).toBe(true)
+})
+
+test("Game.antagonistsAreAlive() when the Renegade is alive", () => {
+    let game = new Game(4)
+    let renegade
+
+    for (let i = 0; i < game.players.length; i++)
+        if (game.players[i].role.name === Roles.BLACKENED)
+            renegade = game.players[i]
+
+    expect(game.antagonistsAreAlive()).toBe(true)
+})
+
+test("Game.antagonistsAreAlive() when the Renegade and Blackened are all dead", () => {
+    let game = new Game(4)
+
+    for (let i = 0; i < game.players.length; i++)
+        if (game.players[i].role.name !== Roles.PROTAGONIST)
+            game.players[i].damage(game.players[i].health.max)
+
+    expect(game.antagonistsAreAlive()).toBe(false)
+})
+
+/*
+test("Game.start()", () => {
+    let game = new Game(4)
+    game.start()
+    expect(!game.antagonistsAreAlive() || !game.protagonistIsAlive()).toBe(true)
+})
+*/
