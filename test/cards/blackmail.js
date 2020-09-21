@@ -1,4 +1,4 @@
-import { HotSeat } from '../../src/modules/classes/cards/hot_seat'
+import { HotSeat } from '../../src/modules/classes/cards/blackmail'
 import { BrownCardNames } from '../../src/modules/classes/cards/brown_card'
 import { Player } from '../../src/modules/classes/player'
 import { RoleCard, Roles } from '../../src/modules/classes/cards/role_card'

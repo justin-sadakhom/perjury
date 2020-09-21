@@ -13,7 +13,7 @@ import { TruthBullet } from './cards/truth_bullet.js'
 import { Alibi } from './cards/alibi.js'
 import { Despair } from './cards/despair.js'
 import { Hope } from './cards/hope.js'
-import { HotSeat } from './cards/hot_seat.js'
+import { HotSeat } from './cards/blackmail.js'
 
 function selectTargetIndex(players) {
     let text = "Who do you want to target?" + '\n'
