@@ -1,12 +1,21 @@
 {
   "name": "perjury",
   "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "@jest/globals": "^26.4.2"
+    "@jest/globals": "^26.4.2",
+    "@pixi/app": "^5.3.3",
+    "@pixi/core": "^5.3.3",
+    "@pixi/display": "^5.3.3",
+    "@pixi/sprite": "^5.3.3",
+    "http-server": "^0.12.3",
+    "pixi.js": "^5.3.3"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "test": "jest"
